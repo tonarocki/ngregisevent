@@ -1,18 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegisService } from './share/regis.service';
+import { MaterialModule } from './material.module';
+
+
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    RouterModule.forRoot([
+      {path: 'home', component: HomeComponent, data: { title: 'หน้าหสัก' }},
+      {path: '**', redirectTo: 'home'}
+    ])
   ],
-  providers: [],
+  providers: [ RegisService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
