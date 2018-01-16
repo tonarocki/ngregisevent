@@ -13,12 +13,14 @@ import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { ListComponent } from './list/list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
