@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -38,7 +38,7 @@ import { RegisterComponent } from './register/register.component';
       {path: '**', redirectTo: 'home'}
     ])
   ],
-  providers: [ RegisService ],
+  providers: [ RegisService, {provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
