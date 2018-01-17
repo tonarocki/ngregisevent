@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisService } from './share/regis.service';
@@ -27,6 +28,7 @@ import { ListComponent } from './list/list.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxQRCodeModule,
     MaterialModule,
     RouterModule.forRoot([
       {path: 'home', component: HomeComponent, data: { title: 'หน้าหสัก' }},
