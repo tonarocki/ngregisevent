@@ -14,15 +14,13 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ListComponent } from './list/list.component';
-import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ListComponent,
-    RegisterComponent
+    ListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +29,7 @@ import { RegisterComponent } from './register/register.component';
     BrowserAnimationsModule,
     MaterialModule,
     RouterModule.forRoot([
-      {path: 'home', component: HomeComponent},
-      {path: 'register', component: RegisterComponent},
+      {path: 'home', component: HomeComponent, data: { title: 'หน้าหสัก' }},
       {path: '**', redirectTo: 'home'}
     ])
   ],
