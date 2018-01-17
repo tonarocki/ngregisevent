@@ -22,4 +22,13 @@ export class RegisService {
     );
   }
 
+  getregisbyid(id: any): Observable<any> {
+    return this.http.get<any>(this.urlregisall + '/' + id)
+    .catch(
+      (errorResponse: HttpErrorResponse) => {
+        return Observable.throw(errorResponse);
+      }
+    );
+  }
+
 }
