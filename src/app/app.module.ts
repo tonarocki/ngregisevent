@@ -1,37 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RegisService } from './share/regis.service';
-import { MaterialModule } from './material.module';
-
-
 
 import { AppComponent } from './app.component';
+<<<<<<< HEAD
 import { HomeComponent } from './home/home.component';
+import { ListComponent } from './list/list.component';
+=======
+>>>>>>> parent of 94883a5... ok
 
 
 @NgModule({
   declarations: [
+<<<<<<< HEAD
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ListComponent
+=======
+    AppComponent
+>>>>>>> parent of 94883a5... ok
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    RouterModule.forRoot([
-      {path: 'home', component: HomeComponent, data: { title: 'หน้าหสัก' }},
-      {path: '**', redirectTo: 'home'}
-    ])
+    BrowserModule
   ],
-  providers: [ RegisService ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
