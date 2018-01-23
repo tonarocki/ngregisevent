@@ -5,6 +5,8 @@ import { OnDestroy, AfterViewInit } from '@angular/core/src/metadata/lifecycle_h
 import { RegisService } from '../share/regis.service';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 
+import { Regisdetail } from '../share/regdetail.model';
+
 
 @Component({
   selector: 'app-register',
@@ -14,20 +16,23 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 
 
-export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   private sub: any = null;
   param: any;
   regislistid: any;
   regisTitle: String;
   regisDetail: String;
-  public registeruser: any;
+  registeruser: any;
+  //userdetail: Element[];
+  Regdetail: Regisdetail;
 
 
 
-  displayedColumns = ['stdid', 'prefix', 'fname', 'lname'];
-  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  //displayedColumns = ['stdid', 'prefix', 'fname', 'lname'];
+  //dataSource = new MatTableDataSource<Element>(this.userdetail);
+
+  //@ViewChild(MatPaginator) paginator: MatPaginator;
 
 
 
@@ -35,6 +40,34 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private route: ActivatedRoute, private router: Router, private registerservice: RegisService) {
     this.param = this.route.snapshot.params.id;
   }
+
+  clear(registerForm): void {
+    registerForm = {};
+  }
+
+  register(formValue): void {
+    const stdid = formValue.stdid;
+    const prefix = formValue.prefix;
+    const fname = formValue.fname;
+    const lname = formValue.lname;
+    const email = formValue.email;
+    const tel = formValue.tel;
+    const agencyid = '1';
+    this.registerservice.register(stdid, prefix, fname, lname, email, tel, agencyid, this.param).subscribe(
+      (regdetail) => {
+        console.log(regdetail);
+         this.Regdetail = regdetail;
+         if (this.Regdetail.id) {
+           alert('บันทึกข้อมูลเรียบร้อย รหัสคือ ' + this.Regdetail.id);
+         }
+      },
+      (error) => {
+        // console.log(error.error.description);
+        console.log(error);
+        //this.errorMessage = error.error.description;
+      }
+    );
+ }
 
   ngOnInit() {
     this.sub = this.registerservice.getregisbyid(this.param).subscribe(
@@ -44,9 +77,6 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
         this.regisDetail = regislistid.detail;
 
         this.registeruser = regislistid.RegisDetails;
-        console.log(this.registeruser);
-
-
       }, (err) => {
         console.log(err);
         this.router.navigate(['/home']);
@@ -54,10 +84,6 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
   ngOnDestroy() {
     if (this.sub != null) {
         this.sub.unsubscribe();
@@ -65,7 +91,11 @@ export class RegisterComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 }
 
+export interface Element {
+  stdid: string;
+  prefix: string;
+  fname: string;
+  lname: string;
+}
 
-
-const ELEMENT_DATA: any = [this.registeruser]  ;
-console.log(this.registeruser);
+const ELEMENT_DATA: Element = this.userdetail  ;
